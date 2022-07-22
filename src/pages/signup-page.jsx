@@ -1,13 +1,13 @@
 import BgContainer from '../components/bg-img-container';
-import Register from '../register';
+import Register from '../components/register';
 
-function Signup() {
+function SignupPage() {
   return (
-    <div className='sign-up-container'>
+    <div className='container'>
       <BgContainer />
       <Register />
     </div>
   );
 }
 
-export default Signup;
+export default SignupPage;
