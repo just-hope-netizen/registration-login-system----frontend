@@ -1,4 +1,4 @@
-const backendHost = "http://localhost:2000/";
+const backendHost = "https://ceevo-server.herokuapp.com/";
 
 
 export function register(data) {
@@ -38,7 +38,7 @@ export function login(email, password) {
 }
 export function verify(userId, uniqueString) {
     return new Promise((res, rej) => {
-        
+
         fetch(`${backendHost}auth/verify/${userId}/${uniqueString}`, {
             method: 'GET',
             headers: { 'Content-Type': 'application/json' },
@@ -49,40 +49,40 @@ export function verify(userId, uniqueString) {
             }).catch((err) => {
                 rej(err)
             });
+    })
+
+}
+export function forgottenPassword(email) {
+    return new Promise((res, rej) => {
+
+        fetch(`${backendHost}users/confirm-email`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email }),
         })
-        
-    }
-    export function forgottenPassword( email) {
-        return new Promise((res, rej) => {
-    
-            fetch(`${backendHost}users/confirm-email`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({email }),
-            })
-                .then((response) => response.json())
-                .then((result) => {
-                    res(result)
-                }).catch((err) => {
-                    rej(err)
-    
-                });
+            .then((response) => response.json())
+            .then((result) => {
+                res(result)
+            }).catch((err) => {
+                rej(err)
+
+            });
+    })
+}
+export function changePassword(password, userId) {
+    return new Promise((res, rej) => {
+
+        fetch(`${backendHost}users/change-password/${userId}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ password }),
         })
-    }
-    export function changePassword( password, userId) {
-        return new Promise((res, rej) => {
-    
-            fetch(`${backendHost}users/change-password/${userId}`, {
-                method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({password }),
-            })
-                .then((response) => response.json())
-                .then((result) => {
-                    res(result)
-                }).catch((err) => {
-                    rej(err)
-    
-                });
-        })
-    }
+            .then((response) => response.json())
+            .then((result) => {
+                res(result)
+            }).catch((err) => {
+                rej(err)
+
+            });
+    })
+}
