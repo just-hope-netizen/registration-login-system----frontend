@@ -9,7 +9,7 @@ function FormInput(props) {
         className={props.className}
         ref={props.refer}
       />
-      <span>{props.errorMsg}</span>
+      <span className='error-msg'>{props.errorMsg}</span>
       {props.children}
     </div>
   );

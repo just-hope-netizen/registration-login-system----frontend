@@ -1,46 +1,45 @@
-
-.App{
-  background-color: #0F70DA;
+.App {
+  background-color: #0f70da;
   padding: 20px;
   display: flex;
   justify-content: center;
-
 }
 .container {
   max-width: 1300px;
+  max-height: 1024px;
   width: 100%;
   box-shadow: 2px 3px 12px -2px;
   height: 100%;
 }
 .bg-img-container,
 .confirm-container,
+.verify-container,
 .form-container {
   width: 100%;
 }
 .input-container,
 .form-container,
+.verify-container,
 .container,
 .confirm-container,
 .bg-img-container {
   display: flex;
 }
-.container {
-  justify-content: center;
-}
+
 .bg-img-container {
   flex-direction: column;
   align-items: center;
   padding: 40px;
 }
 .form-container,
+.verify-container,
 .confirm-container {
   position: relative;
   flex-direction: column;
   padding: 40px;
   background-color: #fff;
 }
-.form-header,
-.confirm-header {
+.logo-container {
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -50,11 +49,16 @@
   font-size: 16px;
   margin-left: 10px;
 }
-.form-header ~ div {
-  margin-bottom: 30px;
+form {
+  margin: 30px 0 10px;
 }
-.category-text {
+.intro-container, .intro{
+  color: #0f70da;
+  text-align: center;
+}
+.intro-container > p {
   font-size: 11px;
+  color: #000;
 }
 .bg-heading {
   color: #fff;
@@ -77,10 +81,10 @@ input {
   border: 1px solid rgb(129, 124, 124);
   border-radius: 5px;
 }
-input:focus{
-  border-color:  #0775ee;
+input:focus {
+  border-color: #0775ee;
 }
-label{
+label {
   font-size: 14px;
 }
 .show-pass-btn {
@@ -90,7 +94,8 @@ label{
   background: none;
   border: none;
 }
-.form-btn{
+.form-btn,
+.verify-btn {
   width: 100%;
   background-color: #000;
   border: none;
@@ -100,28 +105,44 @@ label{
   cursor: pointer;
   margin: 10px 0;
 }
-.form-btn:focus{
+.form-btn:focus {
   opacity: 0.7;
 }
-.form-footer > h6{
-font-weight: 300;
-text-align: center;
+.form-footer > h6 {
+  font-weight: 300;
+  text-align: center;
 }
-.email-confirm-text{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 40px;
+.forgot-pass{
+  display: block;
+  font-size: 15px;
+  margin-bottom: 5px;
+  text-align: center;
+}
+.email-confirm-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 40px;
 }
 
-.email-confirm-text  h3{
-    margin-bottom: 20px;
-    font-weight: 400;
-    color: #0f70da;
+.email-confirm-text h3,
+.check-container ~ h3 {
+  margin-bottom: 20px;
+  font-weight: 400;
+  color: #0f70da;
 }
-.email-confirm-text p {
-    text-align: center;
-    font-size: 15px;
+.email-confirm-text p,
+.check-container ~ p {
+  text-align: center;
+  font-size: 15px;
+  margin-bottom: 40px;
+}
+.check-container ~ h3 {
+  text-align: center;
+}
+.check-container {
+  width: 100px;
+  align-self: center;
 }
 .backdrop {
   position: absolute;
@@ -132,21 +153,21 @@ text-align: center;
   background-color: rgba(0, 0, 0, 0.7);
   z-index: 1;
 }
-.error{
+.error {
   border: 1px solid red;
 }
-.error-msg{
+.error-msg {
   position: absolute;
   bottom: -15px;
   font-size: 10px;
-  color: red
+  color: red;
 }
 .loader {
   position: absolute;
   top: 25%;
   left: 50%;
-  border: 3px solid #f3f3f3; 
-  border-top: 3px solid #0f70da; 
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid #0f70da;
   border-radius: 50%;
   margin: 90px auto;
   width: 50px;
@@ -154,12 +175,51 @@ text-align: center;
   animation: spin 2s linear infinite;
 }
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
-@media(max-width: 768px){
-  .bg-img-container{
+@media (max-width: 768px) {
+  .bg-img-container {
     display: none;
+  }
+ 
+}
+@media (max-width: 375px) {
+  .error-msg{
+    font-size: 7px;
+  }
+}
+@media (max-width: 425px) {
+  .form-container {
+    padding:10px ;
+  }
+  .App{
+    padding: 10px;
+  }
+  h3, .intro{
+    font-size: 16px
+  }
+  label{
+    font-size: 12px;
   }
 }
 
+@media (max-height: 555px){
+  .logo-container, .input-container{
+    margin-bottom: 10px;
+  }
+  form{
+    margin: 10px 0 0;
+  }
+  .error-msg{
+    bottom: -10px;
+  }
+  .App{
+    padding: 10px;
+  }
+  
+}

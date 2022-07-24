@@ -1,89 +1,63 @@
 import { useRef, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { Eye, EyeOff } from '../assets/svg';
-import { saveToLocal } from '../helpers/local';
-import {
-  validateEmail,
-  validatePassword,
-  validateUsername,
-} from '../helpers/validate';
-import { register } from '../helpers/web';
-import Backdrop from './backdrop';
-import FormInput from './form-input';
-import LogoContainer from './logo-container';
+import { toast } from 'react-toastify';
 
-function Register() {
-  const [usernameError, setUsernameError] = useState(false);
+import FormInput from './form-input';
+import { Eye, EyeOff } from '../assets/svg';
+import LogoContainer from './logo-container';
+import { validateEmail, validatePassword } from '../helpers/validate';
+import { login } from '../helpers/web';
+
+function Login() {
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
 
-  const usernameRef = useRef();
-  const emailRef = useRef();
   const passwordRef = useRef();
-
+  const emailRef = useRef();
   const navigate = useNavigate();
 
   function submitHandler(e) {
     e.preventDefault();
-    setIsLoading(true);
-    const username = usernameRef.current.value;
     const email = emailRef.current.value;
     const password = passwordRef.current.value;
-    const validatedUsername = validateUsername(username);
     const validatedEmail = validateEmail(email);
     const validatedPassword = validatePassword(password);
 
-    if (!validatedUsername) {
-      setUsernameError(true);
-      setIsLoading(false);
-    } else if (!validatedEmail) {
+    if (!validatedEmail) {
       setEmailError(true);
-      setIsLoading(false);
     } else if (!validatedPassword) {
       setPasswordError(true);
-      setIsLoading(false);
     } else {
-      setUsernameError(false);
       setEmailError(false);
       setPasswordError(false);
-      sendUserDetails({ username, email, password });
+      loginUser( email, password );
     }
   }
 
-  function sendUserDetails(data) {
-    register(data).then((result) => {
-      if (result.message === 'Email verification message sent successfully') {
-        saveToLocal(data);
-        navigate('/confirmation');
-      } else {
-        alert('Something went wrong, try again.');
-        setIsLoading(false);
+  function loginUser(email, password) {
+    login(email, password).then((res) => {
+      if (res.msg === 'user not found') {
+        toast.info('User not found, you need to sign up.')
+      } else if (res.msg === 'user is not verified') {
+        toast.info('You have not verify your email.')
+      } else if (
+        res.msg === 'password does not match the one stored in the database'
+      ) {
+        toast.info('Wrong password!')
+      }else{
+        navigate('/home')
+        toast.success('Welcome Back')
       }
     });
+    
   }
 
   return (
     <div className='form-container'>
       <LogoContainer />
-      <div className='intro-container'>
-        <h3>Create Account</h3>
-        <p >for business, band or celebrity</p>
-      </div>
+      <h2 className='intro'>Welcome Back</h2>
       <form onSubmit={submitHandler}>
-        <FormInput
-          label={'Username'}
-          type={'text'}
-          placeholder={'username'}
-          name={'username'}
-          className={` ${usernameError && 'error'}`}
-          errorMsg={
-            usernameError &&
-            'You have entered an invalid username, username must be more than 3 characters!'
-          }
-          refer={usernameRef}
-        />
         <FormInput
           label={'Email'}
           type={'email'}
@@ -119,15 +93,16 @@ function Register() {
             {showPassword ? <Eye /> : <EyeOff />}
           </button>
         </FormInput>
-        <button className='form-btn'>Create Account</button>
+        <button className='form-btn'>Login</button>
       </form>
       <footer className='form-footer'>
+        <Link to={'/forgotten-password'} className='forgot-pass'>Forgot your password?</Link>
         <h6>
-          Already have an account ? <Link  to={'/login'}> Login</Link>{' '}
+          Don't have an account? <Link to={'/'}>Create one</Link>
         </h6>
       </footer>
-      {isLoading && <Backdrop />}
     </div>
   );
 }
-export default Register;
+
+export default Login;
