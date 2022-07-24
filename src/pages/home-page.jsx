@@ -1,17 +1,12 @@
-import memeOne from '../assets/image/meme-img.png';
-import memeTwo from '../assets/image/meme-2-img.jpg';
-import memeThree from '../assets/image/meme-3-img.jpg';
-import memeFour from '../assets/image/meme-4-img.jpg';
+import congratsIcon from '../assets/image/congrats-icon.png';
+
 function HomePage() {
   return (
-    <div className='container'>
+    <div className='home-container'>
       <div>
-        <img src={memeOne} alt='' />
-        <img src={memeTwo} alt='' />
-        <img src={memeThree} alt='' />
-        <img src={memeFour} alt='' />
-        {/* <p>check out more funnny meme <a href=''></a></p> */}
+        <img src={congratsIcon} alt='congrats icon' className='home-img'/>
       </div>
+      <p >Hello, thank you for testing my app.</p>
     </div>
   );
 }

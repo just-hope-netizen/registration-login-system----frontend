@@ -4,7 +4,7 @@ function LogoContainer() {
   return (
     <header className='logo-container'>
       <img src={logo} alt='logo' />
-      <h3 className='logo-title'>Capzul</h3>
+      <h3 className='logo-title'>Ceevo</h3>
     </header>
   );
 }
