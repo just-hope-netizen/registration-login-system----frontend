@@ -8,12 +8,15 @@ import { Eye, EyeOff } from '../assets/svg';
 import { validatePassword } from '../helpers/validate';
 import LogoContainer from '../components/logo-container';
 import { changePassword } from '../helpers/web';
+import Backdrop from '../components/backdrop';
 
 function ChangePassPage() {
   const [passwordError, setPasswordError] = useState(false);
   const [passwordMatch, setPasswordMatch] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
 
   const { userId } = useParams();
   const navigate = useNavigate();
@@ -23,15 +26,25 @@ function ChangePassPage() {
 
   function submitHandler(e) {
     e.preventDefault();
+    setIsLoading(true);
+
     const password = passwordRef.current.value;
     const confirmPassword = confirmPasswordRef.current.value;
 
-    if (password !== confirmPassword && setPasswordMatch(false)) return;
-    const validatedPassword = validatePassword(password);
-    if (!validatedPassword) {
-      setPasswordError(true);
-    } else {
-      changePasswordHandler(password, userId);
+    if (password !== confirmPassword){
+      setPasswordMatch(false);
+      setIsLoading(false);
+
+    } else{
+      const validatedPassword = validatePassword(password);
+      if (!validatedPassword) {
+        setPasswordError(true);
+      setIsLoading(false);
+
+      } else {
+        changePasswordHandler(password, userId);
+      }
+
     }
   }
 
@@ -41,6 +54,8 @@ function ChangePassPage() {
         navigate('/login')
       } else {
         toast.error('Something went wrong, try again.');
+      setIsLoading(false);
+
         
       }
     });
@@ -99,6 +114,7 @@ function ChangePassPage() {
           </FormInput>
           <button className='form-btn'>Change Password</button>
         </form>
+        {isLoading && <Backdrop />}
       </div>
     </div>
   );

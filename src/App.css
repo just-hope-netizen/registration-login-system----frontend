@@ -1,3 +1,5 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code');
 .App {
   background-color: #0f70da;
   padding: 20px;
@@ -21,7 +23,7 @@
 .form-container,
 .verify-container,
 .container,
-.home-container,
+.home-img-wrapper,
 .confirm-container,
 .bg-img-container {
   display: flex;
@@ -47,8 +49,9 @@
   margin-bottom: 30px;
 }
 .logo-title {
-  font-size: 16px;
   margin-left: 10px;
+  color: #000;
+  font-family: 'Fira Code', 'monospace';
 }
 form {
   margin: 30px 0 10px;
@@ -90,7 +93,7 @@ label {
 }
 .show-pass-btn {
   position: absolute;
-  top: 45px;
+  top: 40px;
   right: 20px;
   background: none;
   border: none;
@@ -102,20 +105,20 @@ label {
   border: none;
   color: #0775ee;
   padding: 10px 0;
-  border-radius: 15px;
+  border-radius: 5px;
   cursor: pointer;
   margin: 10px 0;
 }
 .form-btn:focus {
   opacity: 0.7;
 }
-.form-footer > h6 {
+.form-footer > h5 {
   font-weight: 300;
   text-align: center;
 }
 .forgot-pass{
   display: block;
-  font-size: 15px;
+  color: #0f70da;
   margin-bottom: 5px;
   text-align: center;
 }
@@ -135,7 +138,6 @@ label {
 .email-confirm-text p,
 .check-container ~ p {
   text-align: center;
-  font-size: 15px;
   margin-bottom: 40px;
 }
 .check-container ~ h3 {
@@ -155,24 +157,29 @@ label {
   z-index: 1;
 }
 .home-container{
+  background-color: #f7f7f7;
+  padding: 40px;
+
+}
+.home-img-wrapper{
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: #f7f7f7;
+  text-align: center;
+  height: calc(100% - 75px);
 }
 .error {
   border: 1px solid red;
 }
 .error-msg {
-  position: absolute;
-  bottom: -15px;
+ 
   font-size: 10px;
   color: red;
 }
 .loader {
   position: absolute;
   top: 25%;
-  left: 50%;
+  left: calc( 50% - 25px );
   border: 3px solid #f3f3f3;
   border-top: 3px solid #0f70da;
   border-radius: 50%;
@@ -193,16 +200,17 @@ label {
   .bg-img-container {
     display: none;
   }
+  .backdrop{
+    position: fixed;
+  }
  
 }
 @media (max-width: 425px) {
-  .form-container {
-    padding:10px ;
-  }
+ 
   .App{
     padding: 10px;
   }
-  h3, .intro{
+   .intro{
     font-size: 16px
   }
   label{
@@ -210,29 +218,14 @@ label {
   }
 }
 @media (max-width: 375px) {
-  .error-msg{
-    font-size: 7px;
-  }
+  
   .home-img{
     width: 160px;
   }
   .home-container p {
     font-size: 10px;
   }
-}
-
-@media (max-height: 555px){
-  .logo-container, .input-container{
-    margin-bottom: 10px;
+  .form-container{
+    overflow-y: scroll;
   }
-  form{
-    margin: 10px 0 0;
-  }
-  .error-msg{
-    bottom: -10px;
-  }
-  .App{
-    padding: 10px;
-  }
-  
 }

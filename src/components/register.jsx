@@ -1,11 +1,11 @@
 import { useRef, useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { Eye, EyeOff } from '../assets/svg';
-import { saveToLocal } from '../helpers/local';
 import {
   validateEmail,
   validatePassword,
-  validateUsername,
+  validateUsername
 } from '../helpers/validate';
 import { register } from '../helpers/web';
 import Backdrop from './backdrop';
@@ -55,10 +55,9 @@ function Register() {
   function sendUserDetails(data) {
     register(data).then((result) => {
       if (result.message === 'Email verification message sent successfully') {
-        saveToLocal(data);
         navigate('/confirmation');
       } else {
-        alert('Something went wrong, try again.');
+        toast.info('Something went wrong, try again.');
         setIsLoading(false);
       }
     });
@@ -122,9 +121,9 @@ function Register() {
         <button className='form-btn'>Create Account</button>
       </form>
       <footer className='form-footer'>
-        <h6>
+        <h5>
           Already have an account ? <Link  to={'/login'}> Login</Link>{' '}
-        </h6>
+        </h5>
       </footer>
       {isLoading && <Backdrop />}
     </div>

@@ -7,11 +7,13 @@ import { Eye, EyeOff } from '../assets/svg';
 import LogoContainer from './logo-container';
 import { validateEmail, validatePassword } from '../helpers/validate';
 import { login } from '../helpers/web';
+import Backdrop from './backdrop';
 
 function Login() {
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const passwordRef = useRef();
   const emailRef = useRef();
@@ -19,6 +21,8 @@ function Login() {
 
   function submitHandler(e) {
     e.preventDefault();
+    setIsLoading(true);
+
     const email = emailRef.current.value;
     const password = passwordRef.current.value;
     const validatedEmail = validateEmail(email);
@@ -26,8 +30,12 @@ function Login() {
 
     if (!validatedEmail) {
       setEmailError(true);
+      setIsLoading(false);
+
     } else if (!validatedPassword) {
       setPasswordError(true);
+      setIsLoading(false);
+
     } else {
       setEmailError(false);
       setPasswordError(false);
@@ -38,13 +46,17 @@ function Login() {
   function loginUser(email, password) {
     login(email, password).then((res) => {
       if (res.msg === 'user not found') {
+        setIsLoading(false);
         toast.info('User not found, you need to sign up.')
       } else if (res.msg === 'user is not verified') {
+        setIsLoading(false);
         toast.info('You have not verify your email.')
       } else if (
         res.msg === 'password does not match the one stored in the database'
       ) {
+        setIsLoading(false);
         toast.info('Wrong password!')
+
       }else{
         navigate('/home')
         toast.success('Welcome Back')
@@ -97,10 +109,11 @@ function Login() {
       </form>
       <footer className='form-footer'>
         <Link to={'/forgotten-password'} className='forgot-pass'>Forgot your password?</Link>
-        <h6>
+        <h5>
           Don't have an account? <Link to={'/'}>Create one</Link>
-        </h6>
+        </h5>
       </footer>
+      {isLoading && <Backdrop />}
     </div>
   );
 }

@@ -7,6 +7,7 @@ import { forgottenPassword } from '../helpers/web';
 import ConfirmationPage from './confirmation-page';
 import inbox from '../assets/image/email-icon.png';
 import Backdrop from '../components/backdrop';
+import { toast } from 'react-toastify';
 
 function ForgottenPage() {
   const [emailError, setEmailError] = useState(false);
@@ -22,8 +23,7 @@ function ForgottenPage() {
     const validatedEmail = validateEmail(email);
     if (!validatedEmail) {
       setEmailError(true);
-        setIsLoading(false);
-
+      setIsLoading(false);
     } else {
       forgottenHandler(email);
     }
@@ -32,14 +32,11 @@ function ForgottenPage() {
   function forgottenHandler(email) {
     forgottenPassword(email).then((res) => {
       if (res.message === 'Password reset message sent successfully') {
-          setEmailConfirmed(true)
+        setEmailConfirmed(true);
         setIsLoading(false);
-
-      }else{
-        alert('Something went wrong, try again.');
+      } else {
+        toast.error('Something went wrong, try again.');
         setIsLoading(false);
-
-
       }
     });
   }
@@ -57,6 +54,7 @@ function ForgottenPage() {
           <BgContainer />
           <div className='form-container'>
             <LogoContainer />
+            <p>Forgot your account's password? Enter your email address and we'll send you a recovery link.</p>
             <form onSubmit={submitHandler}>
               <FormInput
                 label={'Email'}
@@ -70,7 +68,7 @@ function ForgottenPage() {
                   'You have entered an invalid email, check and try again!'
                 }
               />
-              <button className='form-btn'>Confirm Email</button>
+              <button className='form-btn'>Send recovery email</button>
             </form>
             {isLoading && <Backdrop />}
           </div>

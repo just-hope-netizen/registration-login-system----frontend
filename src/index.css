@@ -9,6 +9,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-size: 16px;
 }
 
 /* safari 100vh workaround */
@@ -19,4 +20,8 @@ body,
 .form-container
  {
   height: 100%;
+}
+a{
+  text-decoration: none;
+
 }

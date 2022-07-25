@@ -1,38 +1,35 @@
+import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import { CheckIcon } from '../assets/svg';
+import Backdrop from '../components/backdrop';
 import BgContainer from '../components/bg-img-container';
 import LogoContainer from '../components/logo-container';
-import { loadFromLocal, removeFromLocal } from '../helpers/local';
 import { login, verify } from '../helpers/web';
 
 function VerificationPage() {
   const navigate = useNavigate();
-
+  const [isLoading, setIsLoading] = useState(false);
   const { userId, uniqueString } = useParams();
 
   function verifyAndLoginHandler() {
+    setIsLoading(true);
+
     verify(userId, uniqueString).then((result) => {
       if (result.verified === true) {
-        const { email, password } = loadFromLocal();
-         login(email, password).then((res) => {
-           if (res.msg === 'user not found') {
-             toast.info('User not found, you need to sign up.');
-           } else if (res.msg === 'user is not verified') {
-             toast.info('You have not verify your email.');
-           } else if (
-             res.msg ===
-             'password does not match the one stored in the database'
-           ) {
-             toast.info('Wrong password!');
-           } else {
-             navigate('/home');
-             toast.success('Welcome Back');
-             removeFromLocal()
-           }
-         });
-        
+        login(result.email, result.decryptPassword).then((res) => {
+          if (res.msg === 'Access granted') {
+            navigate('/home');
+            toast.success('Welcome');
+          } else {
+            setIsLoading(false);
+            toast.error('Something went wrong, try again.');
+          }
+        });
+      } else {
+        setIsLoading(false);
+        toast.error('Something went wrong, try again.');
       }
     });
   }
@@ -53,6 +50,7 @@ function VerificationPage() {
         <button className='verify-btn' onClick={verifyAndLoginHandler}>
           Proceed
         </button>
+        {isLoading && <Backdrop />}
       </div>
     </div>
   );
