@@ -31,9 +31,11 @@ function ForgottenPage() {
 
   function forgottenHandler(email) {
     forgottenPassword(email).then((res) => {
-      if (res.message === 'Password reset message sent successfully') {
+      if (res.msg === 'Password reset message sent successfully') {
         setEmailConfirmed(true);
         setIsLoading(false);
+      } else if (res.msg === 'Email is not registered') {
+            toast.info('Email is not registered');
       } else {
         toast.error('Something went wrong, try again.');
         setIsLoading(false);

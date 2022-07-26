@@ -17,7 +17,6 @@ function ChangePassPage() {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-
   const { userId } = useParams();
   const navigate = useNavigate();
 
@@ -31,32 +30,27 @@ function ChangePassPage() {
     const password = passwordRef.current.value;
     const confirmPassword = confirmPasswordRef.current.value;
 
-    if (password !== confirmPassword){
+    if (password !== confirmPassword) {
       setPasswordMatch(false);
       setIsLoading(false);
-
-    } else{
+    } else {
       const validatedPassword = validatePassword(password);
       if (!validatedPassword) {
         setPasswordError(true);
-      setIsLoading(false);
-
+        setIsLoading(false);
       } else {
         changePasswordHandler(password, userId);
       }
-
     }
   }
 
   function changePasswordHandler(password, userId) {
     changePassword(password, userId).then((res) => {
       if (res === 'Pasword changed successfully.') {
-        navigate('/login')
+        navigate('/login');
       } else {
         toast.error('Something went wrong, try again.');
-      setIsLoading(false);
-
-        
+        setIsLoading(false);
       }
     });
   }
