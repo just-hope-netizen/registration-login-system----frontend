@@ -110,7 +110,7 @@ function Login() {
       <footer className='form-footer'>
         <Link to={'/forgotten-password'} className='forgot-pass'>Forgot your password?</Link>
         <h5>
-          Don't have an account? <Link to={'/'}>Create one</Link>
+          Don't have an account? <Link to={'/register'}>Create one</Link>
         </h5>
       </footer>
       {isLoading && <Backdrop />}

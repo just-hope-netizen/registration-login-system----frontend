@@ -14,11 +14,11 @@ function App() {
   return (
     <div className="App">
       <Routes>
-        <Route path='/' element={<SignupPage />} />
+        <Route path='/' element={<SigninPage />} />
+        <Route path='/register' element={<SignupPage />} />
         <Route path='verify/:userId/:uniqueString' element={<VerificationPage />} />
         <Route path='/confirmation' element={<ConfirmationPage />} />
         <Route path='/home' element={<HomePage />} />
-        <Route path='/login' element={<SigninPage />} />
         <Route path='/forgotten-password' element={<ForgottenPage />} />
         <Route path='/change-password/:userId' element={<ChangePassPage />} />
       </Routes>

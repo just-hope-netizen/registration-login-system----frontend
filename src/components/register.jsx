@@ -122,7 +122,7 @@ function Register() {
       </form>
       <footer className='form-footer'>
         <h5>
-          Already have an account ? <Link  to={'/login'}> Login</Link>{' '}
+          Already have an account ? <Link  to={'/'}> Login</Link>{' '}
         </h5>
       </footer>
       {isLoading && <Backdrop />}
