@@ -35,7 +35,7 @@ function Login() {
     } else if (!validatedPassword) {
       setPasswordError(true);
       setIsLoading(false);
-
+      setEmailError(false);
     } else {
       setEmailError(false);
       setPasswordError(false);

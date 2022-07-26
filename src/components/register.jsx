@@ -35,15 +35,19 @@ function Register() {
     const validatedEmail = validateEmail(email);
     const validatedPassword = validatePassword(password);
 
+    
     if (!validatedUsername) {
       setUsernameError(true);
       setIsLoading(false);
     } else if (!validatedEmail) {
       setEmailError(true);
       setIsLoading(false);
+      setUsernameError(false);
     } else if (!validatedPassword) {
       setPasswordError(true);
       setIsLoading(false);
+      setUsernameError(false);
+      setEmailError(false);
     } else {
       setUsernameError(false);
       setEmailError(false);

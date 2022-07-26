@@ -30,13 +30,15 @@ function ChangePassPage() {
     const password = passwordRef.current.value;
     const confirmPassword = confirmPasswordRef.current.value;
 
-    if (password !== confirmPassword) {
-      setPasswordMatch(false);
+    const validatedPassword = validatePassword(password);
+    if (!validatedPassword) {
+      setPasswordError(true);
       setIsLoading(false);
     } else {
-      const validatedPassword = validatePassword(password);
-      if (!validatedPassword) {
-        setPasswordError(true);
+      setPasswordMatch(true);
+      if (password !== confirmPassword) {
+        setPasswordMatch(false);
+        setPasswordError(false)
         setIsLoading(false);
       } else {
         changePasswordHandler(password, userId);
@@ -47,7 +49,7 @@ function ChangePassPage() {
   function changePasswordHandler(password, userId) {
     changePassword(password, userId).then((res) => {
       if (res === 'Pasword changed successfully.') {
-        navigate('/login');
+        navigate('/');
       } else {
         toast.error('Something went wrong, try again.');
         setIsLoading(false);
@@ -68,7 +70,7 @@ function ChangePassPage() {
             refer={passwordRef}
             className={`${
               (passwordError && 'error') || (passwordMatch ? null : 'error')
-            })`}
+            }`}
             errorMsg={
               (passwordError &&
                 ' 7 to 15 characters with one numeric value and special character e.g. 123qwerty$') ||
@@ -92,7 +94,7 @@ function ChangePassPage() {
             placeholder={'password'}
             name={'password'}
             refer={confirmPasswordRef}
-            className={`${passwordMatch ? null : 'error'})`}
+            className={`${passwordMatch ? null : 'error'}`}
             errorMsg={passwordMatch ? null : 'password do not match'}
           >
             <button
