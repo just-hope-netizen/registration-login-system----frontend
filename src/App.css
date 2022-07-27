@@ -76,10 +76,15 @@ form {
 .input-container {
   flex-direction: column;
   margin-bottom: 20px;
-  position: relative;
+}
+.input-wrapper{
+      display: flex;
+    align-items: center;
+    position: relative;
+    margin-top: 10px;
 }
 input {
-  margin-top: 10px;
+  width: 100%;
   padding: 10px 20px;
   outline: none;
   border: 1px solid rgb(129, 124, 124);
@@ -93,7 +98,7 @@ label {
 }
 .show-pass-btn {
   position: absolute;
-  top:  40px;
+  height: 15px;
   right: 20px;
   background: none;
   border: none;

@@ -1,4 +1,4 @@
-const backendHost = "https://ceevo-server.herokuapp.com/";
+const backendHost = 'https://ceevo-server.herokuapp.com/';
 // const backendHost = 'http://localhost:2000/'
 
 export function register(data) {

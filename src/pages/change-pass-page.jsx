@@ -50,6 +50,7 @@ function ChangePassPage() {
     changePassword(password, userId).then((res) => {
       if (res === 'Pasword changed successfully.') {
         navigate('/');
+        toast.success('Pasword changed successfully!');
       } else {
         toast.error('Something went wrong, try again.');
         setIsLoading(false);

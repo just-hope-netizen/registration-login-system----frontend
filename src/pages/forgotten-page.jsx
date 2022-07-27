@@ -31,11 +31,13 @@ function ForgottenPage() {
 
   function forgottenHandler(email) {
     forgottenPassword(email).then((res) => {
+      console.log(res)
       if (res.msg === 'Password reset message sent successfully') {
         setEmailConfirmed(true);
         setIsLoading(false);
       } else if (res.msg === 'Email is not registered') {
-            toast.info('Email is not registered');
+        setIsLoading(false);
+        toast.info('Email is not registered');
       } else {
         toast.error('Something went wrong, try again.');
         setIsLoading(false);
@@ -56,7 +58,10 @@ function ForgottenPage() {
           <BgContainer />
           <div className='form-container'>
             <LogoContainer />
-            <p>Forgot your account's password? Enter your email address and we'll send you a recovery link.</p>
+            <p>
+              Forgot your account's password? Enter your email address and we'll
+              send you a recovery link.
+            </p>
             <form onSubmit={submitHandler}>
               <FormInput
                 label={'Email'}
