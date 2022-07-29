@@ -86,3 +86,21 @@ export function changePassword(password, userId) {
             });
     })
 }
+
+export function getRandomJoke() {
+    return new Promise((res, rej) => {
+        fetch('https://dad-jokes.p.rapidapi.com/random/joke', {
+            method: 'GET',
+            headers: {
+                'X-RapidAPI-Key': 'd71cac2453mshaa620c20fed535bp18040cjsna6dd45bb989b',
+                'X-RapidAPI-Host': 'dad-jokes.p.rapidapi.com'
+            }
+        })
+            .then((response) => response.json())
+            .then((result) => {
+                res(result)
+            }).catch((err) => {
+                rej(err)
+            });
+    })
+}

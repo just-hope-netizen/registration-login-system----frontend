@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Fira+Code');
 .App {
   background-color: #0f70da;
@@ -6,7 +5,8 @@
   display: flex;
   justify-content: center;
 }
-.container, .home-container {
+.container,
+.home-container {
   max-width: 1300px;
   max-height: 1024px;
   width: 100%;
@@ -23,7 +23,7 @@
 .form-container,
 .verify-container,
 .container,
-.home-img-wrapper,
+.home-content-container,
 .confirm-container,
 .bg-img-container {
   display: flex;
@@ -56,7 +56,8 @@
 form {
   margin: 30px 0 10px;
 }
-.intro-container, .intro{
+.intro-container,
+.intro {
   color: #0f70da;
   text-align: center;
 }
@@ -77,11 +78,11 @@ form {
   flex-direction: column;
   margin-bottom: 20px;
 }
-.input-wrapper{
-      display: flex;
-    align-items: center;
-    position: relative;
-    margin-top: 10px;
+.input-wrapper {
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin-top: 10px;
 }
 input {
   width: 100%;
@@ -121,7 +122,7 @@ label {
   font-weight: 300;
   text-align: center;
 }
-.forgot-pass{
+.forgot-pass {
   display: block;
   color: #0f70da;
   margin-bottom: 5px;
@@ -161,15 +162,14 @@ label {
   background-color: rgba(0, 0, 0, 0.7);
   z-index: 1;
 }
-.home-container{
+.home-container {
   background-color: #f7f7f7;
   padding: 40px;
-
 }
-.home-img-wrapper{
+.home-content-container {
+  position: relative;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   text-align: center;
   height: calc(100% - 75px);
 }
@@ -177,14 +177,18 @@ label {
   border: 1px solid red;
 }
 .error-msg {
- 
   font-size: 10px;
   color: red;
+}
+.joke-text {
+  position: relative;
+  top: 60px;
+  line-height: 1.5;
 }
 .loader {
   position: absolute;
   top: 25%;
-  left: calc( 50% - 25px );
+  left: calc(50% - 25px);
   border: 3px solid #f3f3f3;
   border-top: 3px solid #0f70da;
   border-radius: 50%;
@@ -201,36 +205,69 @@ label {
     transform: rotate(360deg);
   }
 }
+
+.pulse,
+.button {
+  position: absolute;
+  top: 210px;
+  width: 80px;
+  height: 40px;
+  border-radius: 5px;
+  background: #0f70da
+  
+  ;
+  color: #fff;
+}
+.pulse {
+  animation: pulse 1.2s ease infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1, 1);
+  }
+  50% {
+    opacity: 0.3;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
 @media (max-width: 768px) {
   .bg-img-container {
     display: none;
   }
-  .backdrop{
+  .backdrop {
     position: fixed;
   }
- 
 }
 @media (max-width: 425px) {
- 
-  .App{
+  .App {
     padding: 10px;
   }
-   .intro{
-    font-size: 16px
+  .intro {
+    font-size: 16px;
   }
-  label{
+  label {
     font-size: 12px;
   }
 }
 @media (max-width: 375px) {
-  
-  .home-img{
+  .home-img {
     width: 160px;
   }
   .home-container p {
-    font-size: 10px;
+    font-size: 14px;
   }
-  .form-container{
+  .form-container {
     overflow-y: scroll;
+  }
+  .pulse,
+  .button {
+    top: 150px;
+  }
+  .joke-text{
+    top: 70px;
   }
 }
