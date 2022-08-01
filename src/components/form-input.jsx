@@ -9,6 +9,7 @@ function FormInput(props) {
           placeholder={props.placeholder}
           className={props.className}
           ref={props.refer}
+          required={true}
         />
         {props.children}
       </div>
