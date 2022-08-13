@@ -92,7 +92,7 @@ export function getRandomJoke() {
         fetch('https://dad-jokes.p.rapidapi.com/random/joke', {
             method: 'GET',
             headers: {
-                'X-RapidAPI-Key': 'd71cac2453mshaa620c20fed535bp18040cjsna6dd45bb989b',
+                'X-RapidAPI-Key': process.env.REACT_RAPID_API_KEY,
                 'X-RapidAPI-Host': 'dad-jokes.p.rapidapi.com'
             }
         })
